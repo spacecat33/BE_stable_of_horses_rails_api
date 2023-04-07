@@ -8,6 +8,16 @@ class StablesController < ApplicationController
         render json: stable, status: :created
     end
 
+    def show
+        stable = Stable.find(params[:id])
+        horse = Horse.find(params[:id])
+        render json: stable, status: :ok
+    rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
+        # byebug
+        render json: {message: error.message} #rescue block does not need an 'end'
+
+    end
+
     def update
         stable = Stable.find(params[:id])
         stable.update(stable_params)

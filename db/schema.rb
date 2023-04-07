@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2023_04_07_095838) do
 
   create_table "stables", force: :cascade do |t|
     t.string "name"
-    t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,11 +1,17 @@
 class StablesController < ApplicationController
+    before_action :set_stable, only: [:show, :update, :destroy]
+
     def index
         render json: Stable.all, status: :ok
     end
 
     def create
-        stable = Stable.create(stable_params)
-        render json: stable, status: :created
+        stable = Stable.new(stable_params)
+        if stable.save
+            render json: stable, status: :created
+        else 
+            render json: { errors: stable.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
     def show
@@ -20,12 +26,11 @@ class StablesController < ApplicationController
 
     def update
         stable = Stable.find(params[:id])
-        stable.update(stable_params)
-
-    rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
-        # byebug
-        render json: {message: error.message} #rescue block does not need an 'end'
-    
+        if stable.update(stable_params)
+            render json: stable, status: :ok
+        else
+            render json: stable.errors, status: :unprocessable_entity
+        end
     end
 
     def destroy
@@ -40,11 +45,14 @@ class StablesController < ApplicationController
 
     private
 
+    # use callbacks to share common setup or constraints between actions.
+    def set_stable
+        stable = Stable.find(params[:id])
+    end
+
     def stable_params
-        #return only the competitions that haven't taken place yet
         params.require(:stable).permit(
             :name,
-            :location
         )        
     end
 

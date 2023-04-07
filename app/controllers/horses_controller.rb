@@ -1,14 +1,21 @@
 class HorsesController < ApplicationController
+    before_action :set_horse, only: [:show, :update, :destroy]
 
     def index
-        render json: Horse.all, status: :ok
+        render json: Horse.all, except: [:created_at, :updated_at, :stable_id], include: [:stable] 
     end
 
+    # POST /horses
     def create
-        horse = Horse.create(horse_params)
-        render json: horse, status: :created
+        horse = Horse.new(horse_params)
+        if horse.save
+            render json: horse, status: :created, location: horse, except: [:created_at, :updated_at, :stable_id], include: [:stable] 
+        else 
+            render json: { errors: horse.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
+    # GET /horses/1
     def show
         horse = Horse.find(params[:id])
         stable = Stable.find(params[:id])
@@ -41,10 +48,16 @@ class HorsesController < ApplicationController
 
     private
 
+    # use callbacks to share common setup or constraints between actions.
+    def set_horse
+        horse = Horse.find(params[:id])
+    end
+
     def horse_params
         #return only the competitions that haven't taken place yet
         params.require(:horse).permit(
-            :name
+            :name,
+            :stable_attributes
         )        
     end
 

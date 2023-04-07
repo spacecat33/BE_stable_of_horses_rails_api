@@ -10,7 +10,7 @@
 # Stable.destroy_all
 Horse.destroy_all
 
-5.times do
-    u = Stable.create(name: Faker::Name.name, location: Faker::Address.full_address)
+15.times do
+    u = Stable.create(name: Faker::Name.name)
     u.horses.create(name: Faker::Creature::Horse.name) 
 end

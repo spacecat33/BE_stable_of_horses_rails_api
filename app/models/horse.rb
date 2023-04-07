@@ -14,7 +14,7 @@ class Horse < ApplicationRecord
         self.name = self.name.titlecase
     end
 
-    def stable_attributes=(stable_name, stable_location)
-        self.stable = Stable.find_or_create_by(stable_name: name, location: stable_location)
+    def stable_attributes=(stable_name)
+        self.stable = Stable.find_or_create_by(name: stable_name)
     end
 end

@@ -1,2 +1,3 @@
 class StablesController < ApplicationController
+    
 end

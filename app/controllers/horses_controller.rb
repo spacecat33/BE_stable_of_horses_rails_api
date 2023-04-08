@@ -27,6 +27,7 @@ class HorsesController < ApplicationController
     end
 
     def update
+        horse = Horse.find(params[:id])
        if horse.update(horse_params)
         render json: horse, except: [:created_at, :updated_at, :stable_id], include: [:stable] 
         else 
@@ -56,7 +57,7 @@ class HorsesController < ApplicationController
         #return only the competitions that haven't taken place yet
         params.require(:horse).permit(
             :name,
-            :stable
+            # :stable
         )        
     end
 

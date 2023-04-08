@@ -2,7 +2,7 @@ class HorsesController < ApplicationController
     before_action :set_horse, only: [:show, :update, :destroy]
 
     def index
-        render json: Horse.all, except: [:created_at, :updated_at, :stable_id], include: [:stable] 
+        render json: Horse.all
     end
 
     # POST /horses
@@ -27,19 +27,18 @@ class HorsesController < ApplicationController
     end
 
     def update
-        horse = Horse.find(params[:id])
-        horse.update(horse_params)
-
-    rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
-        # byebug
-        render json: {message: error.message} #rescue block does not need an 'end'
-    
+       if horse.update(horse_params)
+        render json: horse, except: [:created_at, :updated_at, :stable_id], include: [:stable] 
+        else 
+            render json: horse.errors, status: :unprocessable_entity
+        end
     end
 
     def destroy
         horse = Horse.find(params[:id])
         horse.destroy
-        head :no_content
+        # head :no_content
+        render json: horse
     rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
         # byebug
         render json: {message: error.message} #rescue block does not need an 'end'
@@ -57,7 +56,7 @@ class HorsesController < ApplicationController
         #return only the competitions that haven't taken place yet
         params.require(:horse).permit(
             :name,
-            :stable_attributes
+            :stable
         )        
     end
 

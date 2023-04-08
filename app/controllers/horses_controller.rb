@@ -26,6 +26,7 @@ class HorsesController < ApplicationController
 
     end
 
+    #PATCH/PUT /horses/1
     def update
         horse = Horse.find(params[:id])
        if horse.update(horse_params)
@@ -35,6 +36,7 @@ class HorsesController < ApplicationController
         end
     end
 
+    # DELETE /horses/1
     def destroy
         horse = Horse.find(params[:id])
         horse.destroy
@@ -46,8 +48,8 @@ class HorsesController < ApplicationController
     
     end
 
+    
     private
-
     # use callbacks to share common setup or constraints between actions.
     def set_horse
         horse = Horse.find(params[:id])

@@ -19,7 +19,7 @@ class HorsesController < ApplicationController
     # GET /horses/1
     def show
         horse = Horse.find(params[:id])
-        stable = Stable.find(params[:id])
+        # stable = Stable.find(params[:id])
         render json: horse, except: [:created_at, :updated_at, :stable_id], include: [:stable]
     rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
         # byebug

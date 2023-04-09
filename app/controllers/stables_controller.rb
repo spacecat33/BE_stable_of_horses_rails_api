@@ -17,7 +17,7 @@ class StablesController < ApplicationController
     def show
         stable = Stable.find(params[:id])
         horse = Horse.find(params[:id])
-        render json: stable, status: :ok
+        render json: stable, except: [:created_at, :updated_at], status: :ok
     rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
         # byebug
         render json: {message: error.message} #rescue block does not need an 'end'
@@ -52,7 +52,7 @@ class StablesController < ApplicationController
 
     def stable_params
         params.require(:stable).permit(
-            :name,
+            :name
         )        
     end
 

@@ -7,6 +7,10 @@ class Horse < ApplicationRecord
 
     before_save :make_title_case
 
+    def stable_attributes=(stable_name) #expecting this to be a hash
+        self.stable = Stable.find_or_create_by(name: stable_name)
+    end
+
     private
 
     def make_title_case
@@ -14,7 +18,4 @@ class Horse < ApplicationRecord
         self.name = self.name.titlecase
     end
 
-    def stable_attributes=(stable_name)
-        self.stable = Stable.find_or_create_by(name: stable_name)
-    end
 end

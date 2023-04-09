@@ -2,7 +2,8 @@ class HorsesController < ApplicationController
     before_action :set_horse, only: [:show, :update, :destroy]
 
     def index
-        render json: Horse.all
+        horses = Horse.all
+        render json: horses, except: [:created_at, :updated_at, :stable_id], include: [:stable]
     end
 
     # POST /horses
@@ -48,7 +49,7 @@ class HorsesController < ApplicationController
     
     end
 
-    
+
     private
     # use callbacks to share common setup or constraints between actions.
     def set_horse
@@ -58,8 +59,8 @@ class HorsesController < ApplicationController
     def horse_params
         #return only the competitions that haven't taken place yet
         params.require(:horse).permit(
-            :name,
-            # :stable
+            :name, 
+            :stable_attributes
         )        
     end
 

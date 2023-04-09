@@ -43,9 +43,9 @@ class HorsesController < ApplicationController
         horse.destroy
         # head :no_content
         render json: horse
-    rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
-        # byebug
-        render json: {message: error.message} #rescue block does not need an 'end'
+    # rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
+    #     # byebug
+    #     render json: {message: error.message} #rescue block does not need an 'end'
     
     end
 

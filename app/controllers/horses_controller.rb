@@ -20,7 +20,7 @@ class HorsesController < ApplicationController
     def show
         horse = Horse.find(params[:id])
         stable = Stable.find(params[:id])
-        render json: horse, status: :ok
+        render json: horse, except: [:created_at, :updated_at, :stable_id], include: [:stable]
     rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
         # byebug
         render json: {message: error.message} #rescue block does not need an 'end'

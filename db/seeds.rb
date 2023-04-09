@@ -8,22 +8,22 @@
 
 
 # Stable.destroy_all
+Horse.destroy_all
+Stable.destroy_all
+
+15.times do
+    u = Stable.create(name: Faker::Name.name)
+    u.horses.create(name: Faker::Creature::Horse.name) 
+end
+
 # Horse.destroy_all
 # Stable.destroy_all
+# stable_1 = Stable.create(name: "Top Stable")
+# stable_2 = Stable.create(name: "Pony Farm")
+# stable_3 = Stable.create(name: "Donkey Sanctuary")
 
-# 15.times do
-#     u = Stable.create(name: Faker::Name.name)
-#     u.horses.create(name: Faker::Creature::Horse.name) 
-# end
-
-# Horse.destroy_all
-# Stable.destroy_all
-stable_1 = Stable.create(name: "Top Stable")
-stable_2 = Stable.create(name: "Pony Farm")
-stable_3 = Stable.create(name: "Donkey Sanctuary")
-
-Horse.create([
-    {name: "Horse", stable: stable_1},
-    {name: "Pony", stable: stable_2},
-    {name: "donkey", stable: stable_3}
-])
+# Horse.create([
+#     {name: "Horse", stable: stable_1},
+#     {name: "Pony", stable: stable_2},
+#     {name: "donkey", stable: stable_3}
+# ])

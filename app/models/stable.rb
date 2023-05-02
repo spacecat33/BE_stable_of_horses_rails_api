@@ -6,12 +6,19 @@ class Stable < ApplicationRecord
 
     before_save :make_title_case
 
-    # accepts_nested_attributes_for :horses
+    # binding.pry
+    # accepts_nested_attributes_for :horses 
+
     
 
     def horses_attributes=(horse_name) #expecting this to be a hash
         binding.pry
-        self.horses = Horse.find_or_create_by(name: name)
+        # self.horses = Horse.find_or_create_by(horse_name: horse_name)
+        # horse = Horse.find_or_instantiate_by(name: name)
+        # horse.stable = self
+        # horse.save
+        horse = self.horses.build(name: name) #this will automatically associated the stable to the horse
+        horse.save
     end
 
     private

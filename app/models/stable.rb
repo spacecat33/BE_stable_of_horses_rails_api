@@ -6,8 +6,6 @@ class Stable < ApplicationRecord
 
     before_save :make_title_case
 
-    accepts_nested_attributes_for :horses
-
     def horse_attributes=(horse_name) #expecting this to be a hash
         self.horse = Horse.find_or_create_by(name: horse_name)
     end

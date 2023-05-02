@@ -60,7 +60,7 @@ class HorsesController < ApplicationController
         #return only the competitions that haven't taken place yet
         params.require(:horse).permit(
             :name, 
-            :stable_attributes
+            # :stable_attributes
         )        
     end
 

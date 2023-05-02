@@ -52,12 +52,9 @@ class StablesController < ApplicationController
     end
 
     def stable_params
-        params.require(:stable).permit(
-            :name,
-            :horse,
-            :stable_attributes,
-            :horse_attributes
-        )        
+        params.require(:stable).permit(:name, horse_attributes:[
+            :name
+        ])        
     end
 
 end

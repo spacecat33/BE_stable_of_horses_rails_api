@@ -6,6 +6,7 @@ class StablesController < ApplicationController
     end
 
     def create
+        byebug
         stable = Stable.new(stable_params)
         if stable.save
             render json: stable, status: :created
@@ -52,7 +53,10 @@ class StablesController < ApplicationController
 
     def stable_params
         params.require(:stable).permit(
-            :name
+            :name,
+            :horse,
+            :stable_attributes,
+            :horse_attributes
         )        
     end
 

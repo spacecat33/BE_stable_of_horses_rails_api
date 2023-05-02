@@ -2,7 +2,7 @@ class StablesController < ApplicationController
     before_action :set_stable, only: [:show, :update, :destroy]
 
     def index
-        render json: Stable.all, status: :ok
+        render json: Stable.all, status: :ok, include: [:horses]
     end
 
     def create
@@ -55,8 +55,8 @@ class StablesController < ApplicationController
     def stable_params
         params.require(:stable).permit(:name, horses_attributes:[
             # :horse
-            # :name
-            :horses
+            :name
+            # :horses
             # name: horse_name
         ])        
     end

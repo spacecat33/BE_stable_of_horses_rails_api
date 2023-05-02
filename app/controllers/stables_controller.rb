@@ -10,7 +10,7 @@ class StablesController < ApplicationController
         stable = Stable.new(stable_params)
         # horse = Horse.new(horse_params)
         if stable.save
-            render json: stable, status: :created
+            render json: stable, status: :created, include: [:horses]
         else 
             render json: { errors: stable.errors.full_messages }, status: :unprocessable_entity
         end

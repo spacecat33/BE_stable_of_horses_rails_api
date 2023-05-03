@@ -6,11 +6,11 @@ class StablesController < ApplicationController
     end
 
     def create
-        byebug
+        # byebug
         stable = Stable.new(stable_params)
         # horse = Horse.new(horse_params)
         if stable.save
-            render json: stable, status: :created, include: [:horses]
+            render json: stable, status: :created
         else 
             render json: { errors: stable.errors.full_messages }, status: :unprocessable_entity
         end
@@ -37,18 +37,20 @@ class StablesController < ApplicationController
 
     def destroy
         stable = Stable.find(params[:id])
+        byebug
         stable.destroy
-        head :no_content
+        # head :no_content
+        render json: stable
     rescue ActiveRecord::RecordNotFound => error #consider putting this in application controller so that all controllers can use it
         # byebug
         render json: {message: error.message} #rescue block does not need an 'end'
-    
     end
 
     private
 
     # use callbacks to share common setup or constraints between actions.
     def set_stable
+        binding.pry
         stable = Stable.find(params[:id])
     end
 

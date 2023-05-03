@@ -1,5 +1,5 @@
 class Stable < ApplicationRecord
-    has_many :horses
+    has_many :horses, dependent: :destroy
 
     validates(:name, { :length => { :minimum => 2 } })
     validates :name, uniqueness: true, presence: true      

@@ -37,7 +37,7 @@ class StablesController < ApplicationController
 
     def destroy
         stable = Stable.find(params[:id])
-        byebug
+        # byebug
         stable.destroy
         # head :no_content
         render json: stable
@@ -50,7 +50,7 @@ class StablesController < ApplicationController
 
     # use callbacks to share common setup or constraints between actions.
     def set_stable
-        binding.pry
+        # binding.pry
         stable = Stable.find(params[:id])
     end
 

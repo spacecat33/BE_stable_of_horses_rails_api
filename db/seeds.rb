@@ -12,9 +12,17 @@ Horse.destroy_all
 Stable.destroy_all
 
 15.times do
-    u = Stable.create(name: Faker::Name.name)
-    u.horses.create(name: Faker::Creature::Horse.name) 
+    u = Stable.create(name: Faker::Name.name) 
 end
+
+30.times do
+    Horse.create(name: Faker::Creature::Horse.name, stable_id: Stable.all.sample.id)
+end
+
+# 15.times do
+#     u = Stable.create(name: Faker::Name.name)
+#     u.horses.create(name: Faker::Creature::Horse.name) 
+# end
 
 # Horse.destroy_all
 # Stable.destroy_all

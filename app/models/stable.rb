@@ -11,7 +11,7 @@ class Stable < ApplicationRecord
 
     
 
-    def horses_attributes=(horse_name) #expecting this to be a hash
+    def horses_attributes=(name) #expecting this to be a hash
         binding.pry
         # self.horses = Horse.find_or_create_by(horse_name: horse_name)
         # horse = Horse.find_or_instantiate_by(name: name)

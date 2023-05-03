@@ -17,7 +17,7 @@ class Stable < ApplicationRecord
         # horse = Horse.find_or_instantiate_by(name: name)
         # horse.stable = self
         # horse.save
-        horse = self.horses.build(name: name) #this will automatically associated the stable to the horse
+        horse = self.horses.build(name: name.values[0]) #this will automatically associate the stable to the horse
         horse.save
     end
 
